@@ -1,5 +1,5 @@
 /* Ctônia — service worker (instalação + uso offline do portal) */
-const VERSION = 'ctonia-v2';
+const VERSION = 'ctonia-v3';
 const STATIC_HOSTS = ['cdn.tailwindcss.com', 'cdnjs.cloudflare.com', 'cdn.jsdelivr.net', 'fonts.googleapis.com', 'fonts.gstatic.com', 'unpkg.com', 'kit.fontawesome.com', 'use.fontawesome.com', 'ka-f.fontawesome.com'];
 const SHELL = ['./', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
@@ -16,8 +16,8 @@ self.addEventListener('fetch', e => {
   // Nunca interceptar login/APIs do Google (Drive, OAuth)
   if (/(^|\.)googleapis\.com$|accounts\.google\.com|apis\.google\.com|googleusercontent\.com/.test(url.hostname) && url.hostname !== 'fonts.googleapis.com') return;
   if (url.origin === location.origin) {
-    // Rede primeiro (pega atualizações); cai para o cache se estiver offline
-    e.respondWith(fetch(req).then(res => { const copy = res.clone(); caches.open(VERSION).then(c => c.put(req, copy)); return res; })
+    // Rede primeiro (revalida no servidor, ignorando o cache de 10 min do GitHub Pages); cai para o cache se estiver offline
+    e.respondWith(fetch(req, { cache: 'no-cache' }).then(res => { const copy = res.clone(); caches.open(VERSION).then(c => c.put(req, copy)); return res; })
       .catch(() => caches.match(req).then(r => r || caches.match('./'))));
   } else if (STATIC_HOSTS.includes(url.hostname)) {
     // Bibliotecas e fontes: cache primeiro, atualiza em segundo plano
