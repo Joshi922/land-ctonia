@@ -1,0 +1,25 @@
+{
+  "name": "Ctônia",
+  "short_name": "Ctônia",
+  "description": "Portal Ctônia: Forja, Biblioteca e Gerenciador.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#1B132B",
+  "theme_color": "#1B132B",
+  "lang": "pt-BR",
+  "categories": ["books", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Biblioteca", "url": "./?open=library", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "Forja", "url": "./?open=forja", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "Gerenciar", "url": "./?open=manager", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] }
+  ]
+}
