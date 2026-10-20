@@ -1,5 +1,5 @@
 /* Ctônia — service worker (instalação + uso offline do portal) */
-const VERSION = 'ctonia-v3';
+const VERSION = 'ctonia-v4';
 const STATIC_HOSTS = ['cdn.tailwindcss.com', 'cdnjs.cloudflare.com', 'cdn.jsdelivr.net', 'fonts.googleapis.com', 'fonts.gstatic.com', 'unpkg.com', 'kit.fontawesome.com', 'use.fontawesome.com', 'ka-f.fontawesome.com'];
 const SHELL = ['./', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
