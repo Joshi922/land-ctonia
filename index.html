@@ -526,37 +526,37 @@ html.light .ct-astro-modal .ct-list button.on,html.hub-light .ct-astro-modal .ct
 </style>
 
 <style id="ctonia-flow-bg">
-/* ===== Fundo vivo Ctônia: degradê azul + dourado em fluxo orgânico (claro e escuro) ===== */
+/* ===== Fundo vivo Ctônia: degradê animado (efeito.css) — claro e escuro ===== */
+/* Quadros-chave: o fundo "passeia" pelo degradê ampliado */
+@keyframes movimentoFluido{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 html{
- --ctf-base:linear-gradient(122deg,#ece1bf 0%,#e6e6d0 44%,#cde6e7 100%);
- --ctf-1:rgba(120,203,232,.62);--ctf-2:rgba(236,188,78,.58);--ctf-3:rgba(150,218,208,.50);
- --ctf-4:rgba(255,232,160,.55);--ctf-5:rgba(150,205,240,.50);
+ /* Claro: azul-claro/teal e amarelo/creme (cores do efeito.css) */
+ --ctf-grad:linear-gradient(-45deg,#cde6e3,#fdf1d0,#e0f2f1,#fcf4dd);
  background-color:#e6e2cb!important;min-height:100%;
 }
 html:not(.light){
- --ctf-base:linear-gradient(125deg,#171426 0%,#202238 46%,#172b35 100%);
- --ctf-1:rgba(67,139,178,.42);--ctf-2:rgba(190,132,58,.34);--ctf-3:rgba(48,122,132,.34);
- --ctf-4:rgba(110,86,160,.26);--ctf-5:rgba(60,110,170,.34);
+ /* Escuro: mesma lógica (teal + dourado), em tons profundos */
+ --ctf-grad:linear-gradient(-45deg,#171426,#17323a,#211f38,#32291f);
  background-color:#171426!important;
 }
 html:is(.light,:not(.light)):is(.hub-light,:not(.hub-light)) body{background:transparent!important;background-image:none!important;background-color:transparent!important}
-#ct-flow{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:var(--ctf-base)}
-#ct-flow i{position:absolute;display:block;border-radius:50%;will-change:transform;backface-visibility:hidden;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
-#ct-flow i:nth-child(1){left:35%;top:-18%;width:90vmax;height:38vmax;background:radial-gradient(closest-side,var(--ctf-1),transparent);animation-name:ctf-a;animation-duration:47s;animation-delay:var(--ctf-d1,0s)}
-#ct-flow i:nth-child(2){left:-30%;top:58%;width:95vmax;height:40vmax;background:radial-gradient(closest-side,var(--ctf-2),transparent);animation-name:ctf-b;animation-duration:61s;animation-delay:var(--ctf-d2,0s)}
-#ct-flow i:nth-child(3){left:5%;top:22%;width:80vmax;height:30vmax;background:radial-gradient(closest-side,var(--ctf-3),transparent);animation-name:ctf-c;animation-duration:73s;animation-delay:var(--ctf-d3,0s)}
-#ct-flow i:nth-child(4){left:40%;top:48%;width:85vmax;height:32vmax;background:radial-gradient(closest-side,var(--ctf-4),transparent);animation-name:ctf-d;animation-duration:89s;animation-delay:var(--ctf-d4,0s)}
-#ct-flow i:nth-child(5){left:-20%;top:-10%;width:70vmax;height:28vmax;background:radial-gradient(closest-side,var(--ctf-5),transparent);animation-name:ctf-e;animation-duration:53s;animation-delay:var(--ctf-d5,0s)}
-@keyframes ctf-a{0%,100%{transform:translate3d(0,0,0) rotate(-24deg) scale(1,1)}33%{transform:translate3d(-14vw,9vh,0) rotate(-14deg) scale(1.12,.92)}66%{transform:translate3d(-4vw,-6vh,0) rotate(-30deg) scale(.94,1.1)}}
-@keyframes ctf-b{0%,100%{transform:translate3d(0,0,0) rotate(-18deg) scale(1,1)}30%{transform:translate3d(16vw,-8vh,0) rotate(-26deg) scale(1.1,.94)}65%{transform:translate3d(7vw,6vh,0) rotate(-10deg) scale(.92,1.12)}}
-@keyframes ctf-c{0%,100%{transform:translate3d(0,0,0) rotate(-12deg) scale(1,1)}35%{transform:translate3d(12vw,10vh,0) rotate(-22deg) scale(1.15,.9)}70%{transform:translate3d(-10vw,-5vh,0) rotate(-4deg) scale(.9,1.14)}}
-@keyframes ctf-d{0%,100%{transform:translate3d(0,0,0) rotate(-30deg) scale(1,1)}40%{transform:translate3d(-16vw,-9vh,0) rotate(-20deg) scale(1.1,.95)}75%{transform:translate3d(-6vw,7vh,0) rotate(-36deg) scale(.95,1.1)}}
-@keyframes ctf-e{0%,100%{transform:translate3d(0,0,0) rotate(-20deg) scale(1,1)}30%{transform:translate3d(18vw,8vh,0) rotate(-8deg) scale(1.12,.92)}68%{transform:translate3d(8vw,-7vh,0) rotate(-28deg) scale(.92,1.1)}}
+/* Camada fixa atrás de tudo; .fundo-animado = a classe do efeito.css */
+#ct-flow{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.fundo-animado{
+  background:var(--ctf-grad);
+  background-size:400% 400%;                 /* o "zoom": fundo 4x maior que a tela */
+  animation:movimentoFluido 15s ease infinite;
+  animation-delay:var(--ctf-d1,0s);          /* sincroniza a fase entre portal e iframes */
+}
 /* Relógio no tema claro: sem retângulo azul, mesma cor da barra */
 html:is(.light,.hub-light):is(.light,.hub-light,:not(.x)) body .ct-astro-clock,
 html:is(.light,.hub-light):is(.light,.hub-light,:not(.x)) body .ct-astro .ct-astro-clock,
 html:is(.light,.hub-light):is(.light,.hub-light,:not(.x)) body #portal-view .ct-astro-clock{background:none!important;background-image:none!important;background-color:transparent!important;box-shadow:none!important;border:0!important}
-@media (prefers-reduced-motion:reduce){#ct-flow i{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.fundo-animado{animation:none!important}}
 /* Telas do app: todas transparentes para o fundo aparecer (vence html.light #portal-view etc.) */
 html:is(.light,:not(.light)) body #portal-view,
 html:is(.light,:not(.light)) body #hub-view,
@@ -565,7 +565,7 @@ html:is(.light,:not(.light)) body #workspace-view{background:transparent!importa
 html.light .portal-header{background:rgba(235,229,210,.78)!important}
 html:not(.light) .portal-header{background:rgba(25,24,43,.78)!important}
 </style>
-<script id="ctonia-flow-js">(function(){var d=document.documentElement,n=Date.now()/1000;[47,61,73,89,53].forEach(function(p,i){d.style.setProperty('--ctf-d'+(i+1),(-(n%p)).toFixed(2)+'s')});function m(){var b=document.body;if(!b||document.getElementById('ct-flow'))return;var f=document.createElement('div');f.id='ct-flow';f.setAttribute('aria-hidden','true');f.innerHTML='<i></i><i></i><i></i><i></i><i></i>';b.insertBefore(f,b.firstChild)}if(document.body)m();else document.addEventListener('DOMContentLoaded',m)})();</script>
+<script id="ctonia-flow-js">(function(){var d=document.documentElement,n=Date.now()/1000;d.style.setProperty('--ctf-d1',(-(n%15)).toFixed(2)+'s');function m(){var b=document.body;if(!b||document.getElementById('ct-flow'))return;var f=document.createElement('div');f.id='ct-flow';f.className='fundo-animado';f.setAttribute('aria-hidden','true');b.insertBefore(f,b.firstChild)}if(document.body)m();else document.addEventListener('DOMContentLoaded',m)})();</script>
 
 <style id="ctonia-soft-sapphire-and-astro-colors">
 /* Oráculo: safira suave, com contraste e sem brilho agressivo */
